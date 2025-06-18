@@ -1,49 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ArN TeCh - Bilingual</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-  nav { text-align: right; margin-bottom: 20px; }
-  nav button {
-    background: #0077cc; color: white; border: none; padding: 10px 15px; margin-left: 10px;
-    cursor: pointer; font-weight: bold; border-radius: 5px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ArN TeCh - Bilingual</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    nav {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    nav button {
+      background: #0A75C2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background: #095b94;
+    }
+
+    h1, h2 {
+      color: #222;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .buy-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      margin-top: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      background-color: #1e7e34;
+    }
+
+    form {
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      background-color: #fafafa;
+      box-shadow: 0 0 8px rgba(0,0,0,0.03);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    .fee-info {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      text-align: center;
+      color: #888;
+    }
+
+  </style>
 </head>
 <body>
 
-<nav>
-  <button onclick="showLang('en')">English</button>
-  <button onclick="showLang('bn')">বাংলা</button>
-</nav>
+<div class="container">
+  <nav>
+    <button onclick="showLang('en')">English</button>
+    <button onclick="showLang('bn')">বাংলা</button>
+  </nav>
 
-<div id="content-en">
-  <h1>Welcome to ArN TeCh</h1>
-  <p>We sell electronics and tech products across Bangladesh.</p>
-  <h2>Product & Price</h2>
-  <p>📦 Package Sealer - 430৳</p>
-  <h2>Contact Us</h2>
-  <p>Phone: 01737658711</p>
-  <p>Email: newpc2445@gmail.com</p>
-</div>
+  <div id="content-en">
+    <h1>Welcome to ArN TeCh</h1>
+    <p>We sell electronics and tech products across Bangladesh with trusted delivery.</p>
 
-<div id="content-bn" style="display:none;">
-  <h1>আন টেক-এ আপনাকে স্বাগতম</h1>
-  <p>আমরা বাংলাদেশে ইলেকট্রনিক্স ও টেক পণ্য বিক্রি করি।</p>
-  <h2>পণ্য ও দাম</h2>
-  <p>📦 প্যাকেজ সিলার - ৪৩০৳</p>
-  <h2>যোগাযোগ করুন</h2>
-  <p>ফোন: ০১৭৩৭৬৫৮৭১১</p>
-  <p>ইমেইল: newpc2445@gmail.com</p>
+    <h2>Product & Price</h2>
+    <p>📦 <strong>Package Sealer</strong> – <strong>৳430</strong></p>
+
+    <button class="buy-btn" onclick="document.getElementById('order-form').classList.toggle('hidden')">Buy Now</button>
+
+    <form id="order-form" class="hidden">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" required>
+
+      <label for="address">Shipping Address</label>
+      <textarea id="address" required></textarea>
+
+      <label for="area">Select Area</label>
+      <select id="area" onchange="updateFee()">
+        <option value="ctg">Inside Chattogram</option>
+        <option value="outside">Outside Chattogram</option>
+      </select>
+
+      <p class="fee-info" id="delivery-fee">Delivery Fee: ৳60</p>
+
+      <label for="payment">Payment Method</label>
+      <select id="payment">
+        <option value="cod">Cash on Delivery</option>
+        <option value="bkash">bKash</option>
+      </select>
+
+      <p>⏳ <strong>Estimated delivery:</strong> 2–4 days</p>
+      <button type="submit" class="buy-btn">Place Order</button>
+    </form>
+
+    <h2>Contact Us</h2>
+    <p><strong>Phone:</strong> 01737658711</p>
+    <p><strong>Email:</strong> newpc2445@gmail.com</p>
+  </div>
+
+  <div id="content-bn" style="display:none;">
+    <h1>আন টেক-এ আপনাকে স্বাগতম</h1>
+    <p>আমরা বিশ্বস্ততার সাথে বাংলাদেশে ইলেকট্রনিক্স ও টেক পণ্য বিক্রি করি।</p>
+
+    <h2>পণ্য ও দাম</h2>
+    <p>📦 <strong>প্যাকেজ সিলার</strong> – <strong>৪৩০৳</strong></p>
+
+    <button class="buy-btn" onclick="document.getElementById('order-form').classList.toggle('hidden')">অর্ডার করুন</button>
+  </div>
+
+  <footer>
+    &copy; 2025 ArN TeCh. Trusted by hundreds of customers in Bangladesh.
+  </footer>
 </div>
 
 <script>
   function showLang(lang) {
     document.getElementById('content-en').style.display = (lang === 'en') ? 'block' : 'none';
     document.getElementById('content-bn').style.display = (lang === 'bn') ? 'block' : 'none';
+  }
+
+  function updateFee() {
+    const area = document.getElementById('area').value;
+    const feeText = (area === 'ctg') ? 'Delivery Fee: ৳60' : 'Delivery Fee: ৳120';
+    document.getElementById('delivery-fee').innerText = feeText;
   }
 </script>
 
