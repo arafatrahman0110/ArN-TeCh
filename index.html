@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ArN TeCh - Bilingual</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+  nav { text-align: right; margin-bottom: 20px; }
+  nav button {
+    background: #0077cc; color: white; border: none; padding: 10px 15px; margin-left: 10px;
+    cursor: pointer; font-weight: bold; border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <button onclick="showLang('en')">English</button>
+  <button onclick="showLang('bn')">বাংলা</button>
+</nav>
+
+<div id="content-en">
+  <h1>Welcome to ArN TeCh</h1>
+  <p>We sell electronics and tech products across Bangladesh.</p>
+  <h2>Product & Price</h2>
+  <p>📦 Package Sealer - 430৳</p>
+  <h2>Contact Us</h2>
+  <p>Phone: 01737658711</p>
+  <p>Email: newpc2445@gmail.com</p>
+</div>
+
+<div id="content-bn" style="display:none;">
+  <h1>আন টেক-এ আপনাকে স্বাগতম</h1>
+  <p>আমরা বাংলাদেশে ইলেকট্রনিক্স ও টেক পণ্য বিক্রি করি।</p>
+  <h2>পণ্য ও দাম</h2>
+  <p>📦 প্যাকেজ সিলার - ৪৩০৳</p>
+  <h2>যোগাযোগ করুন</h2>
+  <p>ফোন: ০১৭৩৭৬৫৮৭১১</p>
+  <p>ইমেইল: newpc2445@gmail.com</p>
+</div>
+
+<script>
+  function showLang(lang) {
+    document.getElementById('content-en').style.display = (lang === 'en') ? 'block' : 'none';
+    document.getElementById('content-bn').style.display = (lang === 'bn') ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>
