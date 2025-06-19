@@ -152,11 +152,11 @@
       <option value="outside">Outside Chattogram / চট্টগ্রামের বাইরে</option>
     </select>
 
-    <p class="fee-info" id="delivery-fee">Delivery Fee: ৳60</p>
     <p class="fee-info" id="total-price">Total to Pay: ৳490</p>
+    <p class="fee-info" id="delivery-fee">Delivery Fee: ৳60</p>
 
     <label for="payment">Payment Method / পেমেন্ট</label>
-    <select id="payment">
+    <select id="payment" onchange="handlePaymentChange()">
       <option value="cod">Cash on Delivery</option>
       <option value="bkash">bKash</option>
     </select>
@@ -190,6 +190,26 @@
     document.getElementById('total-price').innerText = `Total to Pay: ৳${productPrice + deliveryFee}`;
   }
 
+  function handlePaymentChange() {
+    const payment = document.getElementById('payment').value;
+    if (payment === 'bkash') {
+      const area = document.getElementById('area').value;
+      const deliveryFee = area === 'ctg' ? 60 : 120;
+      const total = productPrice + deliveryFee;
+
+      alert(`You selected bKash. You will be redirected to the bKash app to pay ৳${total} to 01835624175.`);
+
+      const bkashAppLink = 'https://www.bkash.com/app';
+      const fallbackUrl = 'https://www.bkash.com/';
+
+      window.location.href = bkashAppLink;
+
+      setTimeout(() => {
+        window.location.href = fallbackUrl;
+      }, 1500);
+    }
+  }
+
   async function submitOrder(e) {
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
@@ -200,7 +220,6 @@
     const deliveryFee = area === 'ctg' ? 60 : 120;
     const total = productPrice + deliveryFee;
 
-    // Determine current language to show messages accordingly
     const isEnglish = document.getElementById('content-en').style.display === 'block';
 
     if (!name || !phone || !address) {
@@ -229,18 +248,6 @@
             : `অর্ডার সফল হয়েছে! মোট পরিমাণ: ৳${total}.\nঅনুগ্রহ করে ০১৮৩৫৬২৪১৭৫ নম্বরে বিকাশে পরিশোধ করুন।\nপরিশোধের পরে, আপনাকে দ্রুত যোগাযোগ করা হবে।`;
 
           alert(successMsg);
-
-          // Open bKash app link (note: might not work on all browsers/devices)
-          const bkashAppLink = `bkash://payment?recipient=01835624175&amount=${total}`;
-          const fallbackUrl = 'https://www.bkash.com/';
-
-          // Try to open app
-          window.location.href = bkashAppLink;
-
-          // Redirect to website if app doesn't open after 1.5 seconds
-          setTimeout(() => {
-            window.location.href = fallbackUrl;
-          }, 1500);
         } else {
           alert(isEnglish
             ? `Order placed successfully! Total amount: ৳${total}. We will contact you soon.`
